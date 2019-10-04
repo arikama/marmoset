@@ -1,0 +1,16 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: cron-job-randomword
+spec:
+  jobTemplate:
+    spec:
+      parallelism: 10
+      template:
+        spec:
+          containers:
+            - image: arikama/marmoset-cron-job-randomword
+              name: cron-randomword
+          restartPolicy: Never
+      ttlSecondsAfterFinished: 60
+  schedule: "* * ? * *"

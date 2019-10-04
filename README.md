@@ -3,10 +3,10 @@
 ## Development
 
 - `minikube start`
-- `kubectl apply -f kubernetes`
+- `./deploy.sh`
 
 ## Command
 
 Connect to MySQL server
 
-`kubectl exec -it $MYSQL_POD -- mysql -u root -p`
+`kubectl exec -it $MYSQL_POD -- mysql -p -u root`
