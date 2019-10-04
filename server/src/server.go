@@ -1,11 +1,13 @@
 package main
 
 import (
+	"database/sql"
 	"net/http"
 )
 
 type server struct {
-	router *http.ServeMux
+	database *sql.DB
+	router   *http.ServeMux
 }
 
 func (s *server) listenAndServe() {
