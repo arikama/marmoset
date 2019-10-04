@@ -18,3 +18,10 @@ spec:
             value: password
           image: mysql:5.7.27
           name: mysql
+          volumeMounts:
+            - name: mysql-data
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: persistent-volume-claim
