@@ -8,4 +8,5 @@
 ## Command
 
 Connect to MySQL server
-> `kubectl exec -it $MYSQL_POD -- mysql -u root -p`
+
+`kubectl exec -it $MYSQL_POD -- mysql -u root -p`
