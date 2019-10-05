@@ -10,4 +10,4 @@ json = {
     }
 }
 p = requests.post("http://service-cluster-ip-server/words", json=json)
-print(r.status_code, payload)
+print(r.status_code, json)
