@@ -23,8 +23,10 @@ func main() {
 		log.Fatalln(err.Error())
 	}
 	s := server{
-		database: db,
-		router:   http.DefaultServeMux,
+		database: &database.SQLDb{
+			Instance: db,
+		},
+		router: http.DefaultServeMux,
 	}
 	s.routes()
 	s.listenAndServe()

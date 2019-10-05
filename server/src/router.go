@@ -25,7 +25,7 @@ func (s *server) words() http.HandlerFunc {
 		utils.AddContentTypeJSON(w)
 		switch r.Method {
 		case http.MethodPost:
-			controllers.WordsCreate(w, r)
+			controllers.WordsCreate(w, r, s.database)
 		default:
 			http.NotFound(w, r)
 		}

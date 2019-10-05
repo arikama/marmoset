@@ -1,12 +1,13 @@
 package main
 
 import (
-	"database/sql"
 	"net/http"
+
+	"github.com/arikama/marmoset/server/src/database"
 )
 
 type server struct {
-	database *sql.DB
+	database *database.SQLDb
 	router   *http.ServeMux
 }
 
