@@ -5,7 +5,7 @@ metadata:
 spec:
   jobTemplate:
     spec:
-      parallelism: 10
+      parallelism: 1
       template:
         spec:
           containers:
