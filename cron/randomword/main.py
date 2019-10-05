@@ -1,8 +1,13 @@
 from bs4 import BeautifulSoup
-import urllib3
+import requests
 
-http = urllib3.PoolManager()
-r = http.request('GET', 'https://randomword.com')
-soup = BeautifulSoup(r.data, features='html.parser')
-word = soup.find(id='random_word').get_text()
-print(word)
+r = requests.get("https://randomword.com")
+soup = BeautifulSoup(r.text, features="html.parser")
+word = soup.find(id="random_word").get_text()
+json = {
+    "payload": {
+        "word": word
+    }
+}
+p = requests.post("http://service-cluster-ip-server/words", json=json)
+print(r.status_code, payload)
