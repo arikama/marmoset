@@ -24,6 +24,8 @@ func (s *server) words() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		utils.AddContentTypeJSON(w)
 		switch r.Method {
+		case http.MethodGet:
+			controllers.Words(w, r, s.database)
 		case http.MethodPost:
 			controllers.WordsCreate(w, r, s.database)
 		default:
