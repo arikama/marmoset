@@ -17,7 +17,10 @@ spec:
             - name: MYSQL_HOST
               value: service-cluster-ip-mysql
             - name: MYSQL_PASSWORD
-              value: password
+              valueFrom:
+                secretKeyRef:
+                  key: MYSQL_PASSWORD
+                  name: secret-mysql-password
             - name: MYSQL_USERNAME
               value: root
           image: arikama/marmoset-server

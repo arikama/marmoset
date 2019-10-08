@@ -14,8 +14,11 @@ spec:
     spec:
       containers:
         - env:
-          - name: MYSQL_ROOT_PASSWORD
-            value: password
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: MYSQL_PASSWORD
+                  name: secret-mysql-password
           image: mysql:5.7.27
           name: mysql
           volumeMounts:
