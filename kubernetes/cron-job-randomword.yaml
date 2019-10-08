@@ -11,6 +11,6 @@ spec:
           containers:
             - image: arikama/marmoset-cron-job-randomword
               name: cron-randomword
-          restartPolicy: Never
+          restartPolicy: OnFailure
       ttlSecondsAfterFinished: 60
   schedule: "* * ? * *"
