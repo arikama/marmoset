@@ -21,4 +21,4 @@ Deploy!
 
 Connect to MySQL server
 
-`kubectl exec -it $MYSQL_POD -- mysql -p -u root`
+`./connect.sh $MYSQL_PASSWORD`
