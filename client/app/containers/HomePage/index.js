@@ -1,4 +1,4 @@
-import { Button, Layout } from 'antd';
+import { Button as B, Layout, Spin } from 'antd';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
@@ -7,6 +7,7 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import styled from 'styled-components';
 
+import { loadRandomWords } from 'containers/App/actions';
 import {
   makeSelectError,
   makeSelectLoading,
@@ -14,6 +15,12 @@ import {
 } from 'containers/App/selectors';
 
 import messages from './messages';
+
+const Button = styled(B)`
+  && {
+    margin: 16px;
+  }
+`;
 
 const Description = styled.div`
   padding: 8px;
@@ -28,7 +35,11 @@ const Content = styled(Layout.Content)`
 `;
 
 const RandomWord = styled.div`
+  display: flex;
+  flexDirection: column;
   font-size: 64px;
+  justifyContent: center;
+  min-height: 200px;
   padding: 8px;
 `;
 
@@ -43,8 +54,14 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
           <Description>
             <FormattedMessage {...messages.appDescription} />
           </Description>
-          <RandomWord>Marmoset</RandomWord>
+          <RandomWord>
+            {
+              this.props.loading ?
+              <Spin /> : this.props.words[0]
+            }
+          </RandomWord>
           <Button
+            onClick={this.props.onButtonClick}
             type='primary'
           >
             <FormattedMessage {...messages.next} />
@@ -69,6 +86,7 @@ const mapStateToProps = createStructuredSelector({
 
 export function mapDispatchToProps(dispatch) {
   return {
+    onButtonClick: e => dispatch(loadRandomWords()),
   };
 }
 

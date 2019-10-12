@@ -7,7 +7,7 @@ import {
 
 export const initialState = {
   error: false,
-  loading: false,
+  loading: true,
   words: [],
 };
 
