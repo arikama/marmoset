@@ -1,5 +1,7 @@
 # marmoset
 
+Marmoset is a project to demo Kubernetes' orchestration capabilities, but the app is still useful if you are the kind of person who tends to come up with horrible project names
+
 ## Deployment
 
 1. Make sure you're connected the cluster
