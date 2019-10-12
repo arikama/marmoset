@@ -43,7 +43,11 @@ const RandomWord = styled.div`
   padding: 8px;
 `;
 
-class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class HomePage extends React.PureComponent {
+  componentDidMount() {
+    this.props.dispatchLoadRandomWords()
+  }
+
   render() {
     return (
       <Layout>
@@ -61,7 +65,7 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
             }
           </RandomWord>
           <Button
-            onClick={this.props.onButtonClick}
+            onClick={() => this.props.dispatchLoadRandomWords()}
             type='primary'
           >
             <FormattedMessage {...messages.next} />
@@ -86,7 +90,7 @@ const mapStateToProps = createStructuredSelector({
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onButtonClick: e => dispatch(loadRandomWords()),
+    dispatchLoadRandomWords: () => dispatch(loadRandomWords()),
   };
 }
 
