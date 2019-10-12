@@ -6,8 +6,16 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  header: {
-    id: 'app.components.HomePage.header',
-    defaultMessage: 'This is HomePage component!',
+  appName: {
+    id: 'app.components.HomePage.appName',
+    defaultMessage: 'Marmoset',
+  },
+  appDescription: {
+    id: 'app.components.HomePage.appDescription',
+    defaultMessage: 'Click next to generate an awesome random word for your next project!',
+  },
+  next: {
+    id: 'app.components.HomePage.next',
+    defaultMessage: 'Next',
   },
 });
