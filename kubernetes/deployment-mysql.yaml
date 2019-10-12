@@ -22,8 +22,9 @@ spec:
           image: mysql:5.7.27
           name: mysql
           volumeMounts:
-            - name: mysql-data
-              mountPath: /var/lib/mysql
+            - mountPath: /var/lib/mysql
+              name: mysql-data
+              subPath: marmoset
       volumes:
         - name: mysql-data
           persistentVolumeClaim:
