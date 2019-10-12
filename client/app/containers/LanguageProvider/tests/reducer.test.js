@@ -1,21 +1,19 @@
-import languageProviderReducer from '../reducer';
-import { CHANGE_LOCALE } from '../constants';
+import { fromJS } from 'immutable';
 
-/* eslint-disable default-case, no-param-reassign */
+import languageProviderReducer from '../reducer';
+import {
+  CHANGE_LOCALE,
+} from '../constants';
+
 describe('languageProviderReducer', () => {
   it('returns the initial state', () => {
-    expect(languageProviderReducer(undefined, {})).toEqual({
+    expect(languageProviderReducer(undefined, {})).toEqual(fromJS({
       locale: 'en',
-    });
+    }));
   });
 
   it('changes the locale', () => {
-    expect(
-      languageProviderReducer(undefined, {
-        type: CHANGE_LOCALE,
-        locale: 'de',
-      }),
-    ).toEqual({
+    expect(languageProviderReducer(undefined, { type: CHANGE_LOCALE, locale: 'de' }).toJS()).toEqual({
       locale: 'de',
     });
   });

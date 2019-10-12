@@ -1,13 +1,28 @@
-import { makeSelectLocation } from 'containers/App/selectors';
+import { fromJS } from 'immutable';
 
-describe('makeSelectLocation', () => {
-  it('should select the location', () => {
-    const router = {
-      location: { pathname: '/foo' },
-    };
-    const mockedState = {
-      router,
-    };
-    expect(makeSelectLocation()(mockedState)).toEqual(router.location);
+import { makeSelectLocationState } from 'containers/App/selectors';
+
+describe('makeSelectLocationState', () => {
+  it('should select the route as a plain JS object', () => {
+    const route = fromJS({
+      locationBeforeTransitions: null,
+    });
+    const mockedState = fromJS({
+      route,
+    });
+    expect(makeSelectLocationState()(mockedState)).toEqual(route.toJS());
+  });
+
+  it('should return cached js routeState for same concurrent calls', () => {
+    const route = fromJS({
+      locationBeforeTransitions: null,
+    });
+    const mockedState = fromJS({
+      route,
+    });
+    const selectLocationState = makeSelectLocationState();
+
+    const firstRouteStateJS = selectLocationState(mockedState);
+    expect(selectLocationState(mockedState)).toBe(firstRouteStateJS);
   });
 });

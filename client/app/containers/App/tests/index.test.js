@@ -1,14 +1,16 @@
 import React from 'react';
-import ShallowRenderer from 'react-test-renderer/shallow';
+import { shallow } from 'enzyme';
 
 import App from '../index';
 
-const renderer = new ShallowRenderer();
-
 describe('<App />', () => {
-  it('should render and match the snapshot', () => {
-    renderer.render(<App />);
-    const renderedOutput = renderer.getRenderOutput();
-    expect(renderedOutput).toMatchSnapshot();
+  it('should render its children', () => {
+    const children = (<h1>Test</h1>);
+    const renderedComponent = shallow(
+      <App>
+        {children}
+      </App>
+    );
+    expect(renderedComponent.contains(children)).toBe(true);
   });
 });
