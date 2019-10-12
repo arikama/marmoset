@@ -13,6 +13,7 @@ import {
   makeSelectLoading,
   makeSelectWords,
 } from 'containers/App/selectors';
+import request from 'utils/request';
 
 import messages from './messages';
 
@@ -43,9 +44,21 @@ const RandomWord = styled.div`
   padding: 8px;
 `;
 
-class HomePage extends React.PureComponent {
+class HomePage extends React.Component {
+  state = {
+    loading: true,
+    word: '',
+  }
+
   componentDidMount() {
-    this.props.dispatchLoadRandomWords()
+    request('http://marmoset.arikama.co/api/words', {})
+      .then((response) => {
+        const words = response.words
+        this.setState({ word: words[0] })
+      })
+      .then(() => {
+        this.setState({ loading: false })
+      })
   }
 
   render() {
@@ -60,12 +73,22 @@ class HomePage extends React.PureComponent {
           </Description>
           <RandomWord>
             {
-              this.props.loading ?
-              <Spin /> : this.props.words[0]
+              this.state.loading ?
+              <Spin /> : this.state.word
             }
           </RandomWord>
           <Button
-            onClick={() => this.props.dispatchLoadRandomWords()}
+            onClick={() => {
+              this.setState({ loading: true })
+              request('http://marmoset.arikama.co/api/words', {})
+                .then((response) => {
+                  const words = response.words
+                  this.setState({ word: words[0] })
+                })
+                .then(() => {
+                  this.setState({ loading: false })
+                })
+            }}
             type='primary'
           >
             <FormattedMessage {...messages.next} />
