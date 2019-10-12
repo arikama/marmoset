@@ -1,7 +1,18 @@
 import { Button, Layout } from 'antd';
+import PropTypes from 'prop-types';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { createStructuredSelector } from 'reselect';
 import styled from 'styled-components';
+
+import {
+  makeSelectError,
+  makeSelectLoading,
+  makeSelectWords,
+} from 'containers/App/selectors';
+
 import messages from './messages';
 
 const Description = styled.div`
@@ -21,7 +32,7 @@ const RandomWord = styled.div`
   padding: 8px;
 `;
 
-export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
       <Layout>
@@ -33,7 +44,9 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
             <FormattedMessage {...messages.appDescription} />
           </Description>
           <RandomWord>Marmoset</RandomWord>
-          <Button type='primary'>
+          <Button
+            type='primary'
+          >
             <FormattedMessage {...messages.next} />
           </Button>
         </Content>
@@ -41,3 +54,29 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
     );
   }
 }
+
+HomePage.propTypes = {
+  error: PropTypes.bool,
+  loading: PropTypes.bool,
+  words: PropTypes.arrayOf(PropTypes.string),
+};
+
+const mapStateToProps = createStructuredSelector({
+  error: makeSelectError(),
+  loading: makeSelectLoading(),
+  words: makeSelectWords(),
+});
+
+export function mapDispatchToProps(dispatch) {
+  return {
+  };
+}
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+export default compose(
+  withConnect,
+)(HomePage);
