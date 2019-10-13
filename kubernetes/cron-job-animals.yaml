@@ -1,7 +1,7 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: cron-job-randomword
+  name: cron-job-animals
 spec:
   jobTemplate:
     spec:
@@ -9,7 +9,7 @@ spec:
       template:
         spec:
           containers:
-            - image: arikama/marmoset-cron-job-randomword
-              name: cron-randomword
+            - image: arikama/marmoset-cron-job-animals
+              name: cron-animals
           restartPolicy: OnFailure
   schedule: "* * ? * *"

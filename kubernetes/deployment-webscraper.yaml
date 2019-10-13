@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-webscraper
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: webscraper
+  template:
+    metadata:
+      labels:
+        component: webscraper
+    spec:
+      containers:
+        - image: cigolpl/web-scraper
+          name: webscraper
+          ports:
+            - containerPort: 8080
