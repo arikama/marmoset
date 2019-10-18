@@ -1,7 +1,6 @@
 FROM node:carbon-jessie
-WORKDIR /app
+WORKDIR /marmoset-client
 COPY ./package.json .
-RUN npm install react-app-rewired
 RUN npm install
 COPY . .
 EXPOSE 3000
