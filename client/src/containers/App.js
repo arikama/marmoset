@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { requestWords } from '../actions/words'
+import { Helmet } from '../components'
 
 const { Text, Title } = Typography;
 
@@ -37,6 +38,7 @@ class App extends Component {
   render() {
     return (
       <Display>
+        <Helmet />
         <Title level={2}>Marmoset</Title>
         <Text>
           Click next to generate an awesome random word for your next project!
