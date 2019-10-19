@@ -1,36 +1,66 @@
 import { Button, Spin, Typography } from 'antd';
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import styled from 'styled-components'
 import { requestWords } from '../actions/words'
 
-const { Title } = Typography;
+const { Text, Title } = Typography;
+
+const Display = styled.div`
+  align-items: center;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+`
+
+const Result = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 32px;
+  min-height: 200px;
+`
+
+const Word = styled(Text)`
+  font-size: 64px;
+`
 
 class App extends Component {
+  componentDidMount() {
+    if (this.props.words.length < 1) {
+      this.props.requestWords()
+    }
+  }
+
   render() {
     return (
-      <div
-        style={
-          {
-            alignItems: 'center',
-            display: 'flex',
-            flex: 1,
-            flexDirection: 'column',
-            justifyContent: 'center',
-          }
-        }
-      >
-        <Title>Marmoset</Title>
-        <Spin />
+      <Display>
+        <Title level={2}>Marmoset</Title>
+        <Text>
+          Click next to generate an awesome random word for your next project!
+        </Text>
+        <Result>
+          {this.renderWord()}
+        </Result>
         <Button
-          onClick={e => {
-            console.log(e)
-            this.props.requestWords()
-          }}
+          onClick={this.props.requestWords}
+          size='large'
           type='primary'
         >
           Next
         </Button>
-      </div>
+      </Display>
+    )
+  }
+
+  renderWord = () => {
+    if (this.props.words.length < 1) {
+      return <Spin />
+    }
+    return (
+      <Word>{this.props.words[0]}</Word>
     )
   }
 }
@@ -38,7 +68,6 @@ class App extends Component {
 const mapDispatchToProps = dispatch => {
   return {
     requestWords: () => {
-      console.log('wtf?')
       dispatch(requestWords())
     },
   }
@@ -46,6 +75,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
   return {
+    words: state.app.words,
   }
 }
 
