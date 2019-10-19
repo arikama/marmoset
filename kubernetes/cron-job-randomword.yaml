@@ -12,4 +12,5 @@ spec:
             - image: arikama/marmoset-cron-job-randomword
               name: cron-randomword
           restartPolicy: OnFailure
+      ttlSecondsAfterFinished: 60
   schedule: "* * ? * *"
