@@ -4,7 +4,7 @@ import requests
 
 class Regex():
 
-    p = re.compile("rand_medium\\\"'>([a-z]+)")
+    p = re.compile(r"rand_medium\\\"'>([a-z]+)")
 
     def all(self, s):
         animals = []
