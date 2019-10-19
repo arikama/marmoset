@@ -3,6 +3,7 @@ kind: CronJob
 metadata:
   name: cron-job-animals
 spec:
+  concurrencyPolicy: Forbid
   jobTemplate:
     spec:
       parallelism: 1
@@ -12,5 +13,4 @@ spec:
             - image: arikama/marmoset-cron-job-animals
               name: cron-animals
           restartPolicy: OnFailure
-      ttlSecondsAfterFinished: 60
   schedule: "* * ? * *"
