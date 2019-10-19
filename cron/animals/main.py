@@ -22,7 +22,7 @@ class Scraper():
     def start(self):
         animals = self._scrapeAnimals()
         for animal in animals:
-            print('animal', animal)
+            print('posting', animal, '...')
             self._post(animal)
 
     def _post(self, animal):
@@ -35,6 +35,7 @@ class Scraper():
         return p.status_code, json
 
     def _scrapeAnimals(self):
+        print('scraping...')
         json = {
             "url": "https://www.randomlists.com/random-animals",
             "userAgent": "WebScraper"
@@ -45,8 +46,10 @@ class Scraper():
         return animals
 
 def main():
+    print('starting...')
     parser = Regex()
     scraper = Scraper(parser)
     scraper.start()
+    print('done!')
 
 main()
