@@ -1,7 +1,6 @@
 FROM node:carbon-jessie
-WORKDIR /app
+WORKDIR /marmoset-client
 COPY ./package.json .
-RUN apt-get install libpng-dev
 RUN npm install
 COPY . .
 EXPOSE 3000

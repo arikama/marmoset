@@ -2,4 +2,4 @@
 
 ## Development
 
-1. `docker-compose up --build`
+1. `./dev.sh`

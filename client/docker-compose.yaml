@@ -1,11 +1,11 @@
 services:
-  web:
+  webapp:
     build:
       context: .
       dockerfile: dev.Dockerfile
     ports:
-      - "3000:3000"
+      - 3000:3000
     volumes:
-      - /app/node_modules
-      - .:/app
-version: '3'
+      - /marmoset-client/node_modules
+      - .:/marmoset-client
+version: "3.7"
